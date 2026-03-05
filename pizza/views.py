@@ -25,3 +25,12 @@ def get_pizza_by_id(request, id):
         })
     except:
         return JsonResponse({"message":"Nincs ilyen pizza!"})
+
+def endpoints(request):
+    data = {
+        "pizza/":"Visszaadja az összes pizzát.",
+        "pizza/[id]":"Visszad egy pizzát az id alapján.",
+        "admin/":"Belépés az admin felületre."
+    }
+
+    return JsonResponse(data)
