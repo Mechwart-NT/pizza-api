@@ -17,11 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from pizza.views import get_pizzas, get_pizza_by_id, endpoints
+from pizza import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('pizza/', get_pizzas),
-    path('pizza/<int:id>/', get_pizza_by_id),
-    path('', endpoints)
+    path('pizza/', views.get_pizzas),
+    path('pizza/<int:id>/', views.get_pizza_by_id),
+    path('', views.endpoints),
+    path('test/', views.test_rest)
 ]

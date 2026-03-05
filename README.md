@@ -14,7 +14,7 @@ Virtuális környezet aktiválása. A sor elején megjelenik hogy **(.venv)**
 
 Django telepítése (csak akkor ha ott van a zárójelben hogy .venv!)
 ```cmd
-pip install django
+pip install -r requirements.txt
 ```
 
 Django fejlesztői szerver elindítása
