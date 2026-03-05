@@ -1,19 +1,32 @@
 from .models import Pizza
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+import json
 
-def get_pizzas(request):
-    pizzas = Pizza.objects.all()
-    pizza_names = []
+@csrf_exempt
+def pizzas(request):
+    if request.method == "GET":
+        pizzas = Pizza.objects.all()
+        pizza_names = []
 
-    for pizza in pizzas:
-        pizza_names.append({
-            "id": pizza.id,
-            "name": pizza.name,
-            "priceHUF": pizza.price,
-            "priceEUR": round(pizza.price / 380)
-        })
-    return JsonResponse({"pizzas":pizza_names})
+        for pizza in pizzas:
+            pizza_names.append({
+                "id": pizza.id,
+                "name": pizza.name,
+                "priceHUF": pizza.price,
+                "priceEUR": round(pizza.price / 380)
+            })
+        return JsonResponse({"pizzas":pizza_names})
+    elif request.method == "POST":
+        adatok = json.loads(request.body)
+        name = adatok['name']
+        price = adatok['price']
+        newpizza = Pizza(name=name, price=price)
+        newpizza.save()
+        return JsonResponse({"message":"Pizza létrehozva!"})
+    else:
+        return JsonResponse({"message":"Hibás kérés!"})
+
 
 def get_pizza_by_id(request, id):
     try:

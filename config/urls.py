@@ -21,7 +21,7 @@ from pizza import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('pizza/', views.get_pizzas),
+    path('pizza/', views.pizzas),
     path('pizza/<int:id>/', views.get_pizza_by_id),
     path('', views.endpoints),
     path('test/', views.test_rest)
